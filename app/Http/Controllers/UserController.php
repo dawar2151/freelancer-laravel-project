@@ -88,6 +88,8 @@ class UserController extends Controller {
 	public function store(
 		UserCreateRequest $request)
 	{
+		
+
 		$this->user_gestion->store($request->all());
 
 		return redirect('user')->with('ok', trans('back/users.created'));

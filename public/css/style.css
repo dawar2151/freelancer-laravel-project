@@ -1,0 +1,18 @@
+nav h2 {
+  margin-bottom: 8px; }
+nav li {
+  margin-bottom: 1px; }
+nav a {
+  display: block; }
+  nav a:hover, nav a:focus {
+    color: royalblue; }
+  nav a:active {
+    color: royalblue; }
+
+.title {
+  color: red; }
+
+.text {
+  color: bleu; }
+
+/*# sourceMappingURL=style.css.map */

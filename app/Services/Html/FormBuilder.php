@@ -9,7 +9,7 @@ class FormBuilder extends \Collective\Html\FormBuilder {
 				%s
 			</div>',
 			empty($options) ? '' : $options[0],
-			parent::submit($value, ['class' => 'btn btn-default'])
+			parent::submit($value, ['class' => 'btn btn-info btn-default'])
 		);
 	}
 

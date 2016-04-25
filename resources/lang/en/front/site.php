@@ -1,15 +1,16 @@
 <?php
 
 return [
-	'title' => 'Laravel 5',
+	'title' => 'coortrade',
 	'sub-title' => 'An awesome PHP framework',
 	'home' => 'Home',
 	'contact' => 'Contact',
 	'blog' => 'Blog',
-	'register' => 'Register',
+	'register' => 'Sign Up',
 	'forget-password' => 'Forgotten password',
-	'connection' => 'Connection',
+	'connection' => 'Log In',
 	'administration' => 'Administration',
 	'redaction' => 'Redaction',
-	'logout' => 'Logout'
+	'logout' => 'Logout',
+	'profile'=>'Profile'
 ];

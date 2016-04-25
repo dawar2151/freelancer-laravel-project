@@ -45,6 +45,7 @@ class UserRepository extends BaseRepository
 
 			$user->username = $inputs['username'];
 			$user->email = $inputs['email'];
+			
 
 			if(isset($inputs['role'])) {
 				$user->role_id = $inputs['role'];	
@@ -130,7 +131,7 @@ class UserRepository extends BaseRepository
 	 * @param  int    $confirmation_code
 	 * @return App\Models\User 
 	 */
-	public function store($inputs, $confirmation_code = null)
+	public function store($inputs,$ip, $confirmation_code = null)
 	{
 		$user = new $this->model;
 
@@ -141,7 +142,7 @@ class UserRepository extends BaseRepository
 		} else {
 			$user->confirmed = true;
 		}
-
+		$user->ip=$ip;
 		$this->save($user, $inputs);
 
 		return $user;

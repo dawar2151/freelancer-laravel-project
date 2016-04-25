@@ -1,8 +1,9 @@
 @extends('front.template')
 
 @section('main')
+<div class="container max-width_form">
 	<div class="row">
-		<div class="box">
+		
 			<div class="col-lg-12">
 				<hr>	
 				<h2 class="intro-text text-center">{{ trans('front/register.title') }}</h2>
@@ -28,7 +29,8 @@
 				{!! Form::close() !!}
 
 			</div>
-		</div>
+		
+	</div>
 	</div>
 @stop
 

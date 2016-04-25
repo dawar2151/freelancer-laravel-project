@@ -103,11 +103,11 @@ class AuthController extends Controller
 		UserRepository $user_gestion)
 	{
 		$user = $user_gestion->store(
-			$request->all(), 
+			$request->all(),$request->getClientIp(),
 			$confirmation_code = str_random(30)
 		);
 
-		$this->dispatch(new SendMail($user));
+		//$this->dispatch(new SendMail($user));
 
 		return redirect('/')->with('ok', trans('front/verify.message'));
 	}

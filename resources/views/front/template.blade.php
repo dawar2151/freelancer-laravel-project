@@ -14,6 +14,9 @@
 
 		@yield('head')
 
+		{!! HTML::style('bootflat/css/bootstrap.min.css') !!}
+		{!! HTML::style('bootflat/bootflat/css/bootflat.min.css') !!}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		{!! HTML::style('css/main_front.css') !!}
 
 		<!--[if (lt IE 9) & (!IEMobile)]>
@@ -37,25 +40,25 @@
 
 	<header role="banner">
 
-		<div class="brand">{{ trans('front/site.title') }}</div>
-		<div class="address-bar">{{ trans('front/site.sub-title') }}</div>
-		<div id="flags" class="text-center"></div>
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="index.html">{{ trans('front/site.title') }}</a>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
+<div class="container-fuild">
+    <nav class="navbar navbar-default ">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{URL::to('/')}}">{{ trans('front/site.title') }}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          <!--
 						<li {!! classActivePath('/') !!}>
 							{!! link_to('/', trans('front/site.home')) !!}
 						</li>
+						
 						@if(session('statut') == 'visitor' || session('statut') == 'user')
 							<li {!! classActivePath('contact/create') !!}>
 								{!! link_to('contact/create', trans('front/site.contact')) !!}
@@ -92,36 +95,113 @@
 								</li>
 							@endif
 						@endif
+						-->
+						
+						
+						
+           
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Post project</a></li> 
+          
+           				@if(empty(session('statut')) || session('statut') == 'visitor')
+						<li {!! classActivePath('auth/login') !!}>
+									{!! link_to('auth/login', trans('front/site.connection')) !!}
+						</li>
+						@if(Request::is('auth/register'))
+							<li class="active">
+								{!! link_to('auth/register', trans('front/site.register')) !!}
+							</li>
+						@else
+							<li>
+								{!! link_to('auth/register', trans('front/site.register')) !!}
+							</li>
+						@endif	
+						@else
+						<li><a class="popoverData" href="#" data-content="Default balance..." rel="popover" data-placement="bottom" data-original-title="Current amount..." data-trigger="hover">{{ auth()->user()->amount_by_hour }}.00  <i class="fa fa-usd"></i></a></li>
+						<li><a class="popoverData" href="#" data-content="Coming Soon..." rel="popover" data-placement="bottom" data-original-title="Chat" data-trigger="hover"><i class="fa fa-weixin"></i></a></li>
+						<li><a class="popoverData" href="#" data-content="Coming Soon..." rel="popover" data-placement="bottom" data-original-title="Current projects..." data-trigger="hover"><i class="fa fa-product-hunt"></i></a></li>
 						<li class="dropdown">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#"><img width="32" height="32" alt="{{ session('locale') }}"  src="{!! asset('img/' . session('locale') . '-flag.png') !!}" />&nbsp; <b class="caret"></b></a>
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">{!! HTML::image(auth()->user()->img,auth()->user()->username,array('class'=>'front-img-small')) !!}  <i class="fa fa-sort-desc"></i></a>
 							<ul class="dropdown-menu">
-							@foreach ( config('app.languages') as $user)
-								@if($user !== config('app.locale'))
-									<li><a href="{!! url('language') !!}/{{ $user }}"><img width="32" height="32" alt="{{ $user }}" src="{!! asset('img/' . $user . '-flag.png') !!}"></a></li>
-								@endif
-							@endforeach
+									
+								<li>
+									{!! link_to('auth/logout', trans('front/site.logout')) !!}
+								</li>
+								<li>
+									{!! link_to('user/profile', trans('front/site.profile')) !!}
+								</li>
+									
+							
 							</ul>
 						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+						@endif
+						
+						
+						</ul>
+          
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    </div>
 		@yield('header')	
 	</header>
 
-	<main role="main" class="container">
+	<main role="main">
+		<div class="boxSe container">
 		@if(session()->has('ok'))
 			@include('partials/error', ['type' => 'success', 'message' => session('ok')])
 		@endif	
 		@if(isset($info))
 			@include('partials/error', ['type' => 'info', 'message' => $info])
 		@endif
+		</div>
 		@yield('main')
 	</main>
 
-	<footer role="contentinfo">
+	<footer class="footer" style="background-color:#434a54">
 		 @yield('footer')
-		<p class="text-center"><small>Copyright &copy; Momo</small></p>
+		 <!-- Footer
+
+      ================================================== -->
+      <div class="container">
+		 	<div class="row"><div class="col-md-12">
+		 		<div class="clearfix">
+		 		<div class="footer-logo"><a href="#">Coordinate</a></div>
+                  <dl class="footer-nav">
+                    <dt class="nav-title">PORTFOLIO</dt>
+                    <dd class="nav-item"><a href="#">Web Design</a></dd>
+                    <dd class="nav-item"><a href="#">Branding &amp; Identity</a></dd>
+                    <dd class="nav-item"><a href="#">Mobile Design</a></dd>
+                    <dd class="nav-item"><a href="#">Print</a></dd>
+                    <dd class="nav-item"><a href="#">User Interface</a></dd>
+                  </dl>
+                  <dl class="footer-nav">
+                    <dt class="nav-title">ABOUT</dt>
+                    <dd class="nav-item"><a href="#">The Company</a></dd>
+                    <dd class="nav-item"><a href="#">History</a></dd>
+                    <dd class="nav-item"><a href="#">Vision</a></dd>
+                  </dl>
+                  <dl class="footer-nav">
+                    <dt class="nav-title">GALLERY</dt>
+                    <dd class="nav-item"><a href="#">Flickr</a></dd>
+                    <dd class="nav-item"><a href="#">Picasa</a></dd>
+                    <dd class="nav-item"><a href="#">iStockPhoto</a></dd>
+                    <dd class="nav-item"><a href="#">PhotoDune</a></dd>
+                  </dl>
+                  <dl class="footer-nav">
+                    <dt class="nav-title">CONTACT</dt>
+                    <dd class="nav-item"><a href="#">Basic Info</a></dd>
+                    <dd class="nav-item"><a href="#">Map</a></dd>
+                    <dd class="nav-item"><a href="#">Conctact Form</a></dd>
+                  </dl>
+                </div>
+                <div class="footer-copyright text-center">Copyright &copy; 2016 Coordinate.All rights reserved.</div>
+		 	</div></div>
+		 	</div>
+		 </div>
+      
+ 
 	</footer>
 		
 	{!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
@@ -137,6 +217,11 @@
 		e.src='//www.google-analytics.com/analytics.js';
 		r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 		ga('create','UA-XXXXX-X');ga('send','pageview');
+			$(function(){
+						$('.popoverData').popover();
+$('.popoverOption').popover({ trigger: "hover" });
+});
+
 	</script>
 
 	@yield('scripts')
